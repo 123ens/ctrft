@@ -1,0 +1,28 @@
+#ctrft {
+    text-align: center;
+    background-color: rgb(6, 53, 68);
+    color: aliceblue;
+    padding: 100px;
+    
+}
+
+img {
+    border: 5px solid #555;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+
+}
+
+body {
+    font-family: Poppins, sans-serif;
+    font-weight: 800;
+    font-size: larger;
+}
+
+section{
+    padding: 40px;
+}
+ 
