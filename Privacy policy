@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <body>
-    <h3>Privacy Policy</h3>
-    <p>
+    <h3 class="centered">Privacy Policy</h3>
+    <p class="centered">
         "We take the privacy and security of our users' personal information, including login credentials, very seriously.<br>
          We collect and use this information only for the purpose of providing our services and improving the user experience.<br>
          We do not share or sell this information to third parties, except as required by law or with the user's consent. <Br>
          By using our services, users consent to the collection and use of their personal information in accordance with this Privacy Policy."
     </p>
+    
+    .centered {
+  text-align: center;
+}
 </body>
