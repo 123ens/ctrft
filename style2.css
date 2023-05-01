@@ -92,6 +92,32 @@ a.active, a:hover{
             color: #9cb3c5;
 
         }
+        //--iframe media query--//
+        @media screen and (max-width: 768px) {
+
+    header {
+
+        height: 50px;
+
+    }
+
+    footer {
+
+        height: 30px;
+
+        font-size: 14px;
+
+    }
+
+    iframe {
+
+        width: 100%;
+
+        height: 300px;
+
+    }
+
+}
         #check:checked ~ ul{
             left: 0;
         }
