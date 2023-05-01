@@ -214,7 +214,7 @@ a.active, a:hover{
                         
                         iframe, img {
                             max-width: 100%
-                            height: 0;
+                            height: 80px;
                             padding-bottom: 56.25%
                         }
 
