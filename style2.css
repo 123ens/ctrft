@@ -77,6 +77,39 @@ a.active, a:hover{
   border-radius: 4px;
 }
 
+/* dropdown menu */
+.dropdown_menu{
+    display: none;
+    position: absolute;
+    right: 2rem;
+    top: 60px;
+    height: 0;
+    width: 300px;
+ /*   background: ; */
+    bacdrop fiter: blur(15px);
+    overflow: hidden;
+    transition: height .2s cubic-bezier(0.175, 0885, 0.32, 1.275);
+}
+
+.dropdown_menu.open{
+    height: 240px;
+}
+
+.dropdown_menu li{
+    padding: 0.7rem;
+    display: flex;
+    align-item: center;
+    justify-content: center;
+}
+
+.dropdown_menu .action_btn{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    
+    /*RESPONSIVE DESIGN */
+    
+
 
        /*media queries */
 
