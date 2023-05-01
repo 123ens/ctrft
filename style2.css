@@ -14,27 +14,27 @@ nav {
 
 label.logo {
     color: aliceblue;
-    font-size: 35px;
+    font-size: 2rem;
     line-height: 80px;
-    padding: 0 100px;
+    padding: 0 10%;
     font-weight: 400;
 }
 
 nav ul {
     float: right;
-    margin-right: 20px;
+    margin-right: 5%;
 }
 
 nav ul li {
     display: inline-block;
     line-height: 80px;
-    margin: 0 5px;
+    margin: 0 0.5rem;
 }
 
 nav ul li a {
     color: white;
-    font-size: 17px;
-    padding: 7px 13px;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
     border-radius: 3px;
     text-transform: capitalize;
 }
@@ -44,35 +44,35 @@ a.active, a:hover{
     transition: .5s;
 }
 .checkbtn{
-    font-size: 30px;
+    font-size: 2rem;
     color: white;
     float: right;
     line-height: 80px;
-    margin-right: 40px;
+    margin-right: 2rem;
     cursor: pointer;
 }
     #check {
         display: none;
     }
 
-    @media (max-width: 952px) {
-        label.logo{
-            font-size: 30px;
-            padding-left: 50px;
-        }
+       /*media queries */
 
-        nav ul li a{
-            font-size: 16px;
+    @media (max-width: 858px) {
+        /* hide the navigation menu */
+        nav ul {
+            dispay: none;
         }
-    }
-    @media (max-width: 858px){
+        
+       /*Show the mennu icon*/   
         .checkbtn{
             display: block;
         }
+        
+        /*Style the expanded menu*/
         ul{
             position: fixed;
             width: 100%;
-            height: 100hv;
+            height: 100vh;
             background: #2c3e50;
             top: 80px;
             left: -100%;
@@ -81,43 +81,79 @@ a.active, a:hover{
         }
         nav ul li{
             display: block;
-            margin: 50px 0;
-            line-height: 30px;
+            margin: 2rem 0;
+            line-height: 2rem;
         }
         na ul li a{
-            font-size: 20px;
+            font-size: 1.5rem;
         }
         a:hover, a.active{
             background: none;
             color: #9cb3c5;
-
         }
-        /*--iframe media query--*/
-        @media screen and (max-width: 768px) {
+        
+        /* show the expanded menu the icon i clicked */
+        #check: checked ~ ul{
+            left: 0;
+        }
+        
+        /*styles for larger screens */
+        @media (min-width: 859px) {
+            label.logo{
+                font-size: 2.5rem
+                padding-left: 5%;
+            }
+        
+            nav ul li a{
+                font-size: 1.2rem;
+            }
+            
+            /* styles for even larger screen */
+            @media (min-width: 1200px) {
+                label.logo{
+                    font-size: 3rem;
+                    padding-left: 10%;
+                }
+                
+                /*update the height and padding of the logo */
+                label.logo{
+                    font-size: 30px;
+                    padding; 0 50px;
+                    line-height: 50px;
+                    
+                    /* update the font size and padding of links */
+                    nav ul li a{
+                        font-size: 16px;
+                        padding; 7px 10px;
+                    }
+                    
+                    /* update the height of the section */
+                    
+                    section{
+                        height: calc(100vh - 50px);
+                    }
+                    
+                    /* update the height and padding of the header and footer */
+                    
+                    header {
+                        height: 40px;
+                    }
+                    footer {
+                        height: 20px;
+                        font-size: 12px;
+                    }
+                    
+              
+                         /*--iframe media query--*/
+                    iframe {
 
-    header {
+                        width: 100%;
 
-        height: 50px;
+                        height: 200px;
 
-    }
+                    }
 
-    footer {
-
-        height: 30px;
-
-        font-size: 14px;
-
-    }
-
-    iframe {
-
-        width: 100%;
-
-        height: 300px;
-
-    }
-
-}
+/* show the menu when the check button is checked */
         #check:checked ~ ul{
             left: 0;
         }
