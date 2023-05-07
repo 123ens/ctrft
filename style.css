@@ -51,7 +51,7 @@ padding: 14px 20px;
 display: block;
 color: #ffffff;
 font-weight: 500;
-cursor: pionter;
+cursor: pointer;
 position: relative;
 transition: background 0.1s;
 }
