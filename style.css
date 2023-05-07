@@ -35,7 +35,7 @@ article {
 
 .accordion {
 max-width: 800px;
-box-shadow: 0 0 10px rgba(0. 0. 0.2);
+box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
 border-radius: 5px;
 overflow: hidden;
 font-family: 'Quicksand', sans-serif;
@@ -43,7 +43,7 @@ background: rgb(6, 53, 68);
 }
 
 .accordion__label,
-.acccordion__content {
+.accordion__content {
 padding: 14px 20px;
 }
 
@@ -56,7 +56,7 @@ position: relative;
 transition: background 0.1s;
 }
 
-.accordion__label :hover {
+.accordion__label:hover {
 background: rgb(0, 0, 0.1);
 }
 
