@@ -39,7 +39,7 @@ box-shadow: 0 0 10px rgba(0. 0. 0.2);
 border-radius: 5px;
 overflow: hidden;
 font-family: 'Quicksand', sans-serif;
-backround: rgb(6, 53, 68);
+background: rgb(6, 53, 68);
 }
 
 .accordion__label,
@@ -64,7 +64,7 @@ background: rgb(0, 0, 0.1);
 content:"";
 position: absolute;
 top: 50%;
-transform; translateY(-50%);
+transform: translateY(-50%);
 right: 20px;
 width: 12px;
 height: 6px;
