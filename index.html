@@ -281,6 +281,79 @@
           text-align: center;
         }
          
+         :root {
+
+    --footer-background-color: rgb(6, 53, 68);
+
+}
+
+.footer {
+
+    padding: 50px;
+
+    position: sticky;
+
+    left: 0;
+
+    bottom: 0;
+
+    width: 100%;
+
+    background-color: var(--footer-background-color);
+
+    color: aliceblue;
+
+    text-align: center;
+
+}
+         
+         
+
+<!-- Add an id to the footer element so that it can be easily selected using JavaScript -->
+
+<footer class="footer" id="footer">
+
+    <!-- Footer content goes here -->
+
+</footer>
+
+<script>
+
+    // Get a reference to the footer element
+
+    const footer = document.querySelector('#footer');
+
+    // Hide the footer initially
+
+    footer.style.display = 'none';
+
+    // Add an event listener for the scroll event on the window object
+
+    window.addEventListener('scroll', () => {
+
+        // Check if the user has scrolled to the bottom of the page
+
+        if ((window.innerHeight + window.scrollY) >= document.body.offsetHeight) {
+
+            // Show the footer
+
+            footer.style.display = 'block';
+
+        } else {
+
+            // Hide the footer
+
+            footer.style.display = 'none';
+
+        }
+
+    });
+
+</script>
+
+
+         
+         
         button {
   position: absolute; /* Set the button as absolute position */
   bottom: 0; /* Position the button at the bottom */
