@@ -2,7 +2,7 @@
 <html lang="en">
     <head>
         <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <meta http-equiv="X-UA-Compatible" content="ie-edge">
 
         <title>Home-Cape Town Revealed Faith</title>
@@ -13,6 +13,26 @@
         <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
         
        <style>
+           /* CSS for desktop screens */
+    .container {
+      width: 960px;
+      margin: 0 auto;
+    }
+    
+    /* CSS for tablets */
+    @media (max-width: 768px) {
+      .container {
+        width: 768px;
+      }
+    }
+    
+    /* CSS for mobile devices */
+    @media (max-width: 480px) {
+      .container {
+        width: 100%;
+        padding: 0 10px;
+      }
+    }
   </style>
         <script>
             const toggleBtn = document.querySelector('.toggle_btn')
