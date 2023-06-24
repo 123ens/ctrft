@@ -49,6 +49,31 @@
             }
                 
         </script>
+
+        <script>
+    // Check for browser compatibility
+    function checkBrowserCompatibility() {
+      var isCompatible = true;
+      
+      // Check for unsupported browsers
+      if (navigator.userAgent.indexOf("Chrome") == -1 && navigator.userAgent.indexOf("Firefox") == -1) {
+        isCompatible = false;
+      }
+      
+      return isCompatible;
+    }
+    
+    // Load appropriate content based on browser compatibility
+    function loadContent() {
+      if (checkBrowserCompatibility()) {
+        // Display content for supported browsers
+        document.getElementById("content").innerHTML = "This content is displayed in supported browsers.";
+      } else {
+        // Display fallback content for unsupported browsers
+        document.getElementById("content").innerHTML = "Sorry, this website requires Google Chrome or Mozilla Firefox for optimal viewing.";
+      }
+    }
+  </script>
            
 
     </head>
