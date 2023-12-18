@@ -28,7 +28,7 @@ a.active {
 
 .navbar li {
     display: inline-block;
-    margin-left: 20px; /* Adjust the margin as needed for spacing */
+    margin-right: 20px; /* Adjust the margin as needed for spacing */
 }
 
 /* Optional: Increase the font size for the active link */
