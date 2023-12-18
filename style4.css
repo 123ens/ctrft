@@ -7,9 +7,9 @@
 }
 
 /* Remove the unsupported ::content selector */
-/* ::content {
+ ::content {
     background: aliceblue;
-} */
+} 
 
 /* Add this rule to your existing CSS file */
 a.active {
