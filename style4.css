@@ -14,3 +14,13 @@
 a.active {
     color: white;
 }
+
+/* Add this rule to your existing CSS file */
+.navbar {
+    text-align: right;
+}
+
+.navbar li {
+    display: inline-block;
+    margin-left: 10px; /* Adjust the margin as needed for spacing */
+}
