@@ -10,4 +10,7 @@
     background: aliceblue;
 }
 
-  
+  /* Add this rule to your existing CSS file */
+a.active {
+    color: white;
+}
