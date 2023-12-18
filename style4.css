@@ -24,3 +24,8 @@ a.active {
     display: inline-block;
     margin-left: 10px; /* Adjust the margin as needed for spacing */
 }
+
+/* Optional: Increase the font size for the active link */
+.navbar li a.active {
+    font-size: 20px; /* Adjust the font size for the active link */
+}
