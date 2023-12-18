@@ -34,7 +34,7 @@ a.active {
 /* Optional: Increase the font size for the active link */
 .navbar li a.active {
     color: white;
-    font-size: 25px; /* Adjust the font size for the active link */
+    font-size: 30px; /* Adjust the font size for the active link */
 }
 
 /* Add this rule to your existing CSS file */
