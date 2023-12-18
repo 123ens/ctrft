@@ -48,7 +48,7 @@ a.active {
 /* Add these rules to your existing CSS file */
 body, html {
     margin: 0;
-    padding: 0;
+    padding: 5;
     height: 100%;
 }
 
