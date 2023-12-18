@@ -38,3 +38,24 @@ a.active {
     height: 100%;
 }
 
+/* Add these rules to your existing CSS file */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+}
+
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-grow: 1;
+}
+
+/* Rest of your existing styles */
