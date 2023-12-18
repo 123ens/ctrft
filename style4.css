@@ -27,5 +27,5 @@ a.active {
 
 /* Optional: Increase the font size for the active link */
 .navbar li a.active {
-    font-size: 20px; /* Adjust the font size for the active link */
+    font-size: 25px; /* Adjust the font size for the active link */
 }
