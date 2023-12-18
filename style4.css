@@ -29,3 +29,12 @@ a.active {
 .navbar li a.active {
     font-size: 25px; /* Adjust the font size for the active link */
 }
+
+/* Add this rule to your existing CSS file */
+.center-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
