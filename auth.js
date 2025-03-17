@@ -21,11 +21,18 @@ function signIn(email, password) {
             console.error("Error signing in:", error);
         });
 }
+// Monitor Authentication State
+onAuthStateChanged(auth, (user) => {
+    if (user) {
+        // User is logged in
 
-function showLivestream() {
     document.getElementById("livestream-section").style.display = "block";
     document.querySelector(".signup-container").style.display = "none";
-}
+}  else {
+        document.getElementById("livestream-section").style.display = "none";
+        document.querySelector(".signup-container").style.display = "block";
+    }
+});
 
 window.signUp = signUp;
 window.signIn = signIn;
