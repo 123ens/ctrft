@@ -29,7 +29,7 @@
 }
 
 .signup-container button:hover {
-    background-color: #0056b3; /* Darker blue on hover */
+    background-color: rgb 6, 58, 63; /* Darker blue on hover */
 }
 
 .signup-container h2 {
