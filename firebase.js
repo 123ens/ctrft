@@ -1,9 +1,6 @@
 
 
-const app = initializeApp(firebaseConfig);
-const auth = getAuth(app);
 
-export { auth };
 
 import { auth } from './firebase.js';
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
