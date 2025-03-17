@@ -1,11 +1,13 @@
 .signup-container {
-    max-width: 400px;
+    max-width: 400px; /* Maximum width of the box */
+    width: 100%; /* Make it full width within its parent */
+    height: auto;  /* Auto height based on content */
     margin: 100px auto; /* Adjusted margin to move it down */
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
     text-align: center;
-    background-color: rgb 6, 58, 63; /* Added background color */
+    background-color: #f0f0f0; /* Added background color */
     box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Added shadow for depth */
 }
 
