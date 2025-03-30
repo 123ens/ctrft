@@ -222,6 +222,21 @@ document.getElementById('signout-btn').addEventListener('click', async () => {
     }
 });
 
+function showError(message) {
+    const errorDiv = document.getElementById("error-message");
+    if (errorDiv) {
+        errorDiv.textContent = message;
+        errorDiv.style.display = "block";
+
+        // Auto-hide after 5 seconds
+        setTimeout(() => {
+            errorDiv.style.display = "none";
+        }, 5000);
+    } else {
+        alert(message);
+    }
+}
+
 signoutBtn.addEventListener('click', async () => {
     try {
         await firebase.auth().signOut();
