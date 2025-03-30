@@ -183,33 +183,31 @@ googleSigninBtn.addEventListener('click', async () => {
     }
 });
 
-// Google Sign Up
-googleSignupBtn.addEventListener('click', async () => {
-    setLoading(true);
-    try {
-        const provider = new firebase.auth.GoogleAuthProvider();
-        const result = await firebase.auth().signInWithPopup(provider);
-        console.log('Google sign up successful:', result.user);
-        // Success! The auth state observer will handle the UI update
-    } catch (error) {
-        console.error('Google sign up error:', error);
-        showError('Failed to sign up with Google. Please try again.');
-    } finally {
-        setLoading(false);
-    }
-});
+ // Google Sign In/Up (Combined)
+ googleSigninBtn.addEventListener('click', async () => {
+     await handleGoogleSignIn();
+ });
 
-// Sign Out
+ googleSignupBtn.addEventListener('click', async () => {
+     await handleGoogleSignIn();
+ });
 
-function showError(message) {
-    const errorDiv = document.getElementById("error-message");
-    if (errorDiv) {
-        errorDiv.textContent = message;
-        errorDiv.style.display = "block";
-    } else {
-        alert(message); // Fallback if no error div exists
-    }
-}
+ async function handleGoogleSignIn() {
+     setLoading(true);
+     try {
+         const provider = new firebase.auth.GoogleAuthProvider();
+         const result = await firebase.auth().signInWithPopup(provider);
+         console.log('Google sign in successful:', result.user);
+         // Success! The auth state observer will handle the UI update
+     } catch (error) {
+         console.error('Google sign in error:', error);
+         showError('Failed to sign in with Google. Please try again.');
+     } finally {
+         setLoading(false);
+     }
+ }
+ 
+
 
 document.getElementById('signout-btn').addEventListener('click', async () => {
     try {
