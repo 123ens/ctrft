@@ -57,6 +57,8 @@ firebase.auth().onAuthStateChanged((user) => {
 });
 
 // Helper function to show error messages
+
+
 function showError(message) {
     const errorDiv = document.createElement('div');
     errorDiv.className = 'error-message';
@@ -76,6 +78,7 @@ function showError(message) {
         errorDiv.remove();
     }, 5000);
 }
+showError('Invalid email format. Please try again.');
 
 // Helper function to set loading state
 function setLoading(isLoading) {
