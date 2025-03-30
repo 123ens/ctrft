@@ -1,43 +1,20 @@
+// Import the functions you need from the SDKs you need
+import { initializeApp } from "firebase/app";
+// TODO: Add SDKs for Firebase products that you want to use
+// https://firebase.google.com/docs/web/setup#available-libraries
+
+// Your web app's Firebase configuration
+const firebaseConfig = {
+  apiKey: "AIzaSyBvqmhU5EOiYFQ8N3lSb1SMc7MPCXhOyj0",
+  authDomain: "ctrft-livestream.firebaseapp.com",
+  projectId: "ctrft-livestream",
+  storageBucket: "ctrft-livestream.firebasestorage.app",
+  messagingSenderId: "562371146015",
+  appId: "1:562371146015:web:39a6727864d94684ff402a"
+};
+
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
 
 
 
-
-import { auth } from './firebase.js';
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from "firebase/auth";
-
-document.getElementById("signup-form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const email = e.target.email.value;
-  const password = e.target.password.value;
-
-  createUserWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      console.log("User signed up:", userCredential.user);
-      localStorage.setItem("authToken", "true"); // Simple token for demo
-      window.location.href = "/livestream"; // Redirect to live stream page
-    })
-    .catch((error) => {
-      console.error("Error signing up:", error.message);
-    });
-});
-
-document.getElementById("signin-form").addEventListener("submit", (e) => {
-  e.preventDefault();
-  const email = e.target.email.value;
-  const password = e.target.password.value;
-
-  signInWithEmailAndPassword(auth, email, password)
-    .then((userCredential) => {
-      console.log("User signed in:", userCredential.user);
-      localStorage.setItem("authToken", "true"); // Simple token for demo
-      window.location.href = "/livestream"; // Redirect to live stream page
-    })
-    .catch((error) => {
-      console.error("Error signing in:", error.message);
-    });
-});
-
-if (!localStorage.getItem("authToken")) {
-    alert("Please log in to access the live stream.");
-    window.location.href = "/login";
-  }
