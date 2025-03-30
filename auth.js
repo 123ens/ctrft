@@ -77,6 +77,15 @@ function setLoading(isLoading) {
     });
 }
 
+buttons.forEach(button => {
+    if (!button.hasAttribute('data-original-text')) {
+        button.setAttribute('data-original-text', button.textContent);
+    }
+    button.disabled = isLoading;
+    button.textContent = isLoading ? 'Loading...' : button.getAttribute('data-original-text');
+});
+
+
 // Sign Up
 signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
@@ -191,6 +200,28 @@ googleSignupBtn.addEventListener('click', async () => {
 });
 
 // Sign Out
+
+function showError(message) {
+    const errorDiv = document.getElementById("error-message");
+    if (errorDiv) {
+        errorDiv.textContent = message;
+        errorDiv.style.display = "block";
+    } else {
+        alert(message); // Fallback if no error div exists
+    }
+}
+
+document.getElementById('signout-btn').addEventListener('click', async () => {
+    try {
+        await auth.signOut();
+        console.log('User signed out');
+        window.location.reload(); // Reload page or redirect to login
+    } catch (error) {
+        console.error('Error signing out:', error);
+        showError('Failed to sign out. Please try again.');
+    }
+});
+
 signoutBtn.addEventListener('click', async () => {
     try {
         await firebase.auth().signOut();
