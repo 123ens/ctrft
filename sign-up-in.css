@@ -33,13 +33,13 @@
 }
 
 .auth-container input:focus {
-    border-color: #4CAF50;
+    border-color: #333;
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
 }
 
 .auth-container button {
     padding: 12px;
-    background: #4CAF50;
+    background: #333;
     color: white;
     border: none;
     border-radius: 8px;
@@ -50,7 +50,7 @@
 }
 
 .auth-container button:hover {
-    background: #45a049;
+    background: #333;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
 }
@@ -136,7 +136,7 @@
 }
 
 .auth-switch a {
-    color: rgb(6, 53, 68);
+    color: #333;
     text-decoration: none;
     font-weight: 500;
 }
