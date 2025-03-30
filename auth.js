@@ -1,54 +1,49 @@
-import { 
-    createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, 
-    signInWithPopup, 
-    GoogleAuthProvider, 
-    signOut,
-    onAuthStateChanged 
-} from "firebase/auth";
-import { auth } from "./firebase.js";
+// DOM Elements
+const signinForm = document.getElementById('signin-form');
+const signupForm = document.getElementById('signup-form');
+const signinFormContainer = document.getElementById('signin-form-container');
+const signupFormContainer = document.getElementById('signup-form-container');
+const showSignupLink = document.getElementById('show-signup');
+const showSigninLink = document.getElementById('show-signin');
+const signoutBtn = document.getElementById('signout-btn');
+const userEmailSpan = document.getElementById('user-email');
+const authContainer = document.getElementById('auth-container');
+const livestreamSection = document.getElementById('livestream-section');
+const googleSigninBtn = document.getElementById('google-signin');
+const googleSignupBtn = document.getElementById('google-signup');
 
-// Form switching functionality
-document.getElementById('show-signup').addEventListener('click', (e) => {
+// Form switching
+showSignupLink.addEventListener('click', (e) => {
     e.preventDefault();
-    document.getElementById('signin-form-container').classList.remove('active');
-    document.getElementById('signup-form-container').classList.add('active');
+    signinFormContainer.classList.remove('active');
+    signupFormContainer.classList.add('active');
 });
 
-document.getElementById('show-signin').addEventListener('click', (e) => {
+showSigninLink.addEventListener('click', (e) => {
     e.preventDefault();
-    document.getElementById('signup-form-container').classList.remove('active');
-    document.getElementById('signin-form-container').classList.add('active');
+    signupFormContainer.classList.remove('active');
+    signinFormContainer.classList.add('active');
 });
 
 // Authentication state observer
-onAuthStateChanged(auth, (user) => {
+firebase.auth().onAuthStateChanged((user) => {
     console.log('Auth state changed:', user ? 'User signed in' : 'User signed out');
     if (user) {
         // User is signed in
         console.log('User email:', user.email);
-        const authContainer = document.getElementById('auth-container');
-        const livestreamSection = document.getElementById('livestream-section');
-        const userInfo = document.getElementById('user-info');
-        
-        console.log('Before state change:');
-        console.log('Auth container display:', authContainer.style.display);
-        console.log('Livestream section display:', livestreamSection.style.display);
-        
+        userEmailSpan.textContent = user.email;
         authContainer.style.display = 'none';
         livestreamSection.style.display = 'block';
-        userInfo.style.display = 'block';
-        document.getElementById('user-email').textContent = user.email;
-        
-        console.log('After state change:');
         console.log('Auth container display:', authContainer.style.display);
         console.log('Livestream section display:', livestreamSection.style.display);
     } else {
         // User is signed out
         console.log('User signed out, hiding livestream');
-        document.getElementById('auth-container').style.display = 'block';
-        document.getElementById('livestream-section').style.display = 'none';
-        document.getElementById('user-info').style.display = 'none';
+        userEmailSpan.textContent = '';
+        authContainer.style.display = 'block';
+        livestreamSection.style.display = 'none';
+        console.log('Auth container display:', authContainer.style.display);
+        console.log('Livestream section display:', livestreamSection.style.display);
     }
 });
 
@@ -57,21 +52,17 @@ function showError(message) {
     const errorDiv = document.createElement('div');
     errorDiv.className = 'error-message';
     errorDiv.textContent = message;
-    errorDiv.style.color = '#f44336';
-    errorDiv.style.marginTop = '10px';
-    errorDiv.style.textAlign = 'center';
     
-    // Remove any existing error messages
-    const existingError = document.querySelector('.error-message');
+    const activeForm = signinFormContainer.classList.contains('active') ? 
+        signinFormContainer : signupFormContainer;
+    
+    const existingError = activeForm.querySelector('.error-message');
     if (existingError) {
         existingError.remove();
     }
     
-    // Add the new error message
-    const form = document.querySelector('.form-container.active form');
-    form.appendChild(errorDiv);
+    activeForm.insertBefore(errorDiv, activeForm.firstChild);
     
-    // Remove error after 5 seconds
     setTimeout(() => {
         errorDiv.remove();
     }, 5000);
@@ -87,7 +78,7 @@ function setLoading(isLoading) {
 }
 
 // Sign Up
-document.getElementById('signup-form').addEventListener('submit', async (e) => {
+signupForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     console.log('Sign up form submitted');
     setLoading(true);
@@ -98,7 +89,7 @@ document.getElementById('signup-form').addEventListener('submit', async (e) => {
     console.log('Attempting to create user with email:', email);
 
     try {
-        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
+        const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
         console.log('User signed up successfully:', userCredential.user);
         // Success! The auth state observer will handle the UI update
     } catch (error) {
@@ -129,7 +120,7 @@ document.getElementById('signup-form').addEventListener('submit', async (e) => {
 });
 
 // Sign In
-document.getElementById('signin-form').addEventListener('submit', async (e) => {
+signinForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     setLoading(true);
     
@@ -137,7 +128,7 @@ document.getElementById('signin-form').addEventListener('submit', async (e) => {
     const password = document.getElementById('signin-password').value;
 
     try {
-        const userCredential = await signInWithEmailAndPassword(auth, email, password);
+        const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
         console.log('User signed in:', userCredential.user);
         // Success! The auth state observer will handle the UI update
     } catch (error) {
@@ -168,11 +159,11 @@ document.getElementById('signin-form').addEventListener('submit', async (e) => {
 });
 
 // Google Sign In
-const googleProvider = new GoogleAuthProvider();
-document.getElementById('google-signin').addEventListener('click', async () => {
+googleSigninBtn.addEventListener('click', async () => {
     setLoading(true);
     try {
-        const result = await signInWithPopup(auth, googleProvider);
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await firebase.auth().signInWithPopup(provider);
         console.log('Google sign in successful:', result.user);
         // Success! The auth state observer will handle the UI update
     } catch (error) {
@@ -183,11 +174,12 @@ document.getElementById('google-signin').addEventListener('click', async () => {
     }
 });
 
-// Google Sign Up (same as sign in for Google)
-document.getElementById('google-signup').addEventListener('click', async () => {
+// Google Sign Up
+googleSignupBtn.addEventListener('click', async () => {
     setLoading(true);
     try {
-        const result = await signInWithPopup(auth, googleProvider);
+        const provider = new firebase.auth.GoogleAuthProvider();
+        const result = await firebase.auth().signInWithPopup(provider);
         console.log('Google sign up successful:', result.user);
         // Success! The auth state observer will handle the UI update
     } catch (error) {
@@ -199,9 +191,9 @@ document.getElementById('google-signup').addEventListener('click', async () => {
 });
 
 // Sign Out
-document.getElementById('signout-btn').addEventListener('click', async () => {
+signoutBtn.addEventListener('click', async () => {
     try {
-        await signOut(auth);
+        await firebase.auth().signOut();
         console.log('User signed out');
         // Success! The auth state observer will handle the UI update
     } catch (error) {
