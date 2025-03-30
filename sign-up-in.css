@@ -1,38 +1,63 @@
-.signup-container {
-    max-width: 400px; /* Maximum width of the box */
-    width: 100%; /* Make it full width within its parent */
-    height: auto;  /* Auto height based on content */
-    margin: 100px auto; /* Adjusted margin to move it down */
+.auth-container {
+    max-width: 400px;
+    margin: 50px auto;
     padding: 20px;
-    border: 1px solid #ccc;
+    background: white;
     border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+}
+
+.auth-container h2 {
     text-align: center;
-    background-color: #6495eD; /* Added background color */
-    box-shadow: 0 0 10px rgba(0,0,0,0.1); /* Added shadow for depth */
+    color: #333;
+    margin-bottom: 20px;
 }
 
-.signup-container input {
-    width: 90%;
+.auth-container form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-bottom: 20px;
+}
+
+.auth-container input {
     padding: 10px;
-    margin-bottom: 10px;
-    border: 1px solid #ddd; /* Adjusted input border */
-    border-radius: 5px; /* Rounded corners for inputs */
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
 }
 
-.signup-container button {
-    padding: 10px 20px;
-    background-color: #007bff; /* Blue background for buttons */
+.auth-container button {
+    padding: 10px;
+    background: #4CAF50;
     color: white;
     border: none;
-    border-radius: 5px;
-    cursor: pointer; /* Pointer cursor on hover */
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background 0.3s;
 }
 
-.signup-container button:hover {
-    background-color: rgb 6, 58, 63; /* Darker blue on hover */
+.auth-container button:hover {
+    background: #45a049;
 }
 
-.signup-container h2 {
-    margin-bottom: 20px;
-    color: #333; /* Darker text color for headings */
+#user-info {
+    display: none;
+    text-align: right;
+    padding: 10px;
 }
+
+#signout-btn {
+    background: #f44336;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 10px;
+}
+
+#signout-btn:hover {
+    background: #da190b;
+} 
