@@ -1,3 +1,16 @@
+// Form switching functionality
+document.getElementById('show-signup').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('signin-form-container').classList.remove('active');
+    document.getElementById('signup-form-container').classList.add('active');
+});
+
+document.getElementById('show-signin').addEventListener('click', (e) => {
+    e.preventDefault();
+    document.getElementById('signup-form-container').classList.remove('active');
+    document.getElementById('signin-form-container').classList.add('active');
+});
+
 // Authentication state observer
 auth.onAuthStateChanged((user) => {
     if (user) {
@@ -46,6 +59,31 @@ document.getElementById('signin-form').addEventListener('submit', (e) => {
         });
 });
 
+// Google Sign In
+const googleProvider = new firebase.auth.GoogleAuthProvider();
+document.getElementById('google-signin').addEventListener('click', () => {
+    auth.signInWithPopup(googleProvider)
+        .then((result) => {
+            // Google sign in successful
+            console.log('Google sign in successful:', result.user);
+        })
+        .catch((error) => {
+            alert(error.message);
+        });
+});
+
+// Google Sign Up (same as sign in for Google)
+document.getElementById('google-signup').addEventListener('click', () => {
+    auth.signInWithPopup(googleProvider)
+        .then((result) => {
+            // Google sign up successful
+            console.log('Google sign up successful:', result.user);
+        })
+        .catch((error) => {
+            alert(error.message);
+        });
+});
+
 // Sign Out
 document.getElementById('signout-btn').addEventListener('click', () => {
     auth.signOut()
@@ -57,4 +95,3 @@ document.getElementById('signout-btn').addEventListener('click', () => {
             console.error('Error signing out:', error);
         });
 }); 
-
