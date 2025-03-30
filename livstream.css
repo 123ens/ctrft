@@ -1,8 +1,10 @@
 /* Centering the livestream section */
 #livestream-section {
-    display: block; /* Ensure the section is visible */
-    text-align: center; /* Centers content horizontally */
-    padding-top: 50px; /* Adjust the value to move it further down */
+    display: flex; /* Enables flexbox for centering */
+    justify-content: center; /* Centers horizontally */
+    align-items: center; /* Centers vertically */
+    height: 100vh; /* Ensures it takes up the full viewport height */
+    text-align: center; /* Aligns text content */
 }
 
 /* Centering the container */
