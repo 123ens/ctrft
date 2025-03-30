@@ -33,13 +33,13 @@
 }
 
 .auth-container input:focus {
-    border-color: #333;
+    border-color: #4CAF50;
     box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
 }
 
 .auth-container button {
     padding: 12px;
-    background: #333;
+    background: #4CAF50;
     color: white;
     border: none;
     border-radius: 8px;
@@ -49,10 +49,17 @@
     transition: all 0.3s ease;
 }
 
-.auth-container button:hover {
-    background: #333;
+.auth-container button:hover:not(:disabled) {
+    background: #45a049;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(76, 175, 80, 0.2);
+}
+
+.auth-container button:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 .divider {
@@ -90,11 +97,19 @@
     transition: all 0.3s ease;
 }
 
-.google-btn:hover {
+.google-btn:hover:not(:disabled) {
     background: #f8f8f8;
     border-color: #ddd;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+}
+
+.google-btn:disabled {
+    background: #f8f8f8;
+    border-color: #e1e1e1;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 .google-btn img {
@@ -123,10 +138,17 @@
     transition: all 0.3s ease;
 }
 
-#signout-btn:hover {
+#signout-btn:hover:not(:disabled) {
     background: #da190b;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(244, 67, 54, 0.2);
+}
+
+#signout-btn:disabled {
+    background: #cccccc;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
 }
 
 .auth-switch {
@@ -136,7 +158,7 @@
 }
 
 .auth-switch a {
-    color: #333;
+    color: #4CAF50;
     text-decoration: none;
     font-weight: 500;
 }
@@ -151,4 +173,26 @@
 
 .form-container.active {
     display: block;
-} 
+}
+
+.error-message {
+    color: #f44336;
+    background-color: #ffebee;
+    padding: 10px;
+    border-radius: 8px;
+    margin-top: 10px;
+    text-align: center;
+    font-size: 14px;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
