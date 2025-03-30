@@ -23,14 +23,29 @@ document.getElementById('show-signin').addEventListener('click', (e) => {
 
 // Authentication state observer
 onAuthStateChanged(auth, (user) => {
+    console.log('Auth state changed:', user ? 'User signed in' : 'User signed out');
     if (user) {
         // User is signed in
-        document.getElementById('auth-container').style.display = 'none';
-        document.getElementById('livestream-section').style.display = 'block';
-        document.getElementById('user-info').style.display = 'block';
+        console.log('User email:', user.email);
+        const authContainer = document.getElementById('auth-container');
+        const livestreamSection = document.getElementById('livestream-section');
+        const userInfo = document.getElementById('user-info');
+        
+        console.log('Before state change:');
+        console.log('Auth container display:', authContainer.style.display);
+        console.log('Livestream section display:', livestreamSection.style.display);
+        
+        authContainer.style.display = 'none';
+        livestreamSection.style.display = 'block';
+        userInfo.style.display = 'block';
         document.getElementById('user-email').textContent = user.email;
+        
+        console.log('After state change:');
+        console.log('Auth container display:', authContainer.style.display);
+        console.log('Livestream section display:', livestreamSection.style.display);
     } else {
         // User is signed out
+        console.log('User signed out, hiding livestream');
         document.getElementById('auth-container').style.display = 'block';
         document.getElementById('livestream-section').style.display = 'none';
         document.getElementById('user-info').style.display = 'none';
@@ -74,14 +89,17 @@ function setLoading(isLoading) {
 // Sign Up
 document.getElementById('signup-form').addEventListener('submit', async (e) => {
     e.preventDefault();
+    console.log('Sign up form submitted');
     setLoading(true);
     
     const email = document.getElementById('signup-email').value;
     const password = document.getElementById('signup-password').value;
 
+    console.log('Attempting to create user with email:', email);
+
     try {
         const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-        console.log('User signed up:', userCredential.user);
+        console.log('User signed up successfully:', userCredential.user);
         // Success! The auth state observer will handle the UI update
     } catch (error) {
         console.error('Sign up error:', error);
