@@ -1,0 +1,11 @@
+/* Centering the livestream section */
+#livestream-section {
+    display: none; /* Initially hidden */
+    text-align: center; /* Centers content horizontally */
+}
+
+/* Centering the container */
+.center-container {
+    margin: 0 auto; /* Centers the container */
+    display: inline-block; /* Ensures it's inline and centered */
+}
