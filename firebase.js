@@ -6,8 +6,6 @@ import { getAuth } from "firebase/auth";
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
-import { initializeApp } from "firebase/app";
-
 const firebaseConfig = {
   apiKey: "AIzaSyBvqmhU5EOiYFQ8N3lSb1SMc7MPCXhOyj0",
   authDomain: "ctrft-livestream.firebaseapp.com",
@@ -20,8 +18,8 @@ const firebaseConfig = {
 // Initialize Firebase
 let auth;
 try {
-    const app = initializeApp(firebaseConfig);
-    auth = getAuth(app);
+    const app = firebase.initializeApp(firebaseConfig);
+    auth = firebase.auth();
     console.log('Firebase initialized successfully');
 } catch (error) {
     console.error('Error initializing Firebase:', error);
