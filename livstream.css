@@ -1,6 +1,6 @@
 /* Centering the livestream section */
 #livestream-section {
-    display: none; /* Initially hidden */
+    display: block; /* Ensure the section is visible */
     text-align: center; /* Centers content horizontally */
 }
 
