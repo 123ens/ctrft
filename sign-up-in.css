@@ -169,6 +169,12 @@
     justify-content: center;
 } 
 
+#user-email {
+    font-weight: bold;
+    color: #0066cc;
+}
+
+
 
     footer {
         position: fixed;
