@@ -2,6 +2,7 @@
 #livestream-section {
     display: block; /* Ensure the section is visible */
     text-align: center; /* Centers content horizontally */
+    padding-top: 50px; /* Adjust the value to move it further down */
 }
 
 /* Centering the container */
