@@ -1,3 +1,13 @@
+import { 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    signInWithPopup, 
+    GoogleAuthProvider, 
+    signOut,
+    onAuthStateChanged 
+} from "firebase/auth";
+import { auth } from "./firebase.js";
+
 // Form switching functionality
 document.getElementById('show-signup').addEventListener('click', (e) => {
     e.preventDefault();
@@ -12,7 +22,7 @@ document.getElementById('show-signin').addEventListener('click', (e) => {
 });
 
 // Authentication state observer
-auth.onAuthStateChanged((user) => {
+onAuthStateChanged(auth, (user) => {
     if (user) {
         // User is signed in
         document.getElementById('auth-container').style.display = 'none';
@@ -70,7 +80,7 @@ document.getElementById('signup-form').addEventListener('submit', async (e) => {
     const password = document.getElementById('signup-password').value;
 
     try {
-        const userCredential = await auth.createUserWithEmailAndPassword(email, password);
+        const userCredential = await createUserWithEmailAndPassword(auth, email, password);
         console.log('User signed up:', userCredential.user);
         // Success! The auth state observer will handle the UI update
     } catch (error) {
@@ -109,7 +119,7 @@ document.getElementById('signin-form').addEventListener('submit', async (e) => {
     const password = document.getElementById('signin-password').value;
 
     try {
-        const userCredential = await auth.signInWithEmailAndPassword(email, password);
+        const userCredential = await signInWithEmailAndPassword(auth, email, password);
         console.log('User signed in:', userCredential.user);
         // Success! The auth state observer will handle the UI update
     } catch (error) {
@@ -140,11 +150,11 @@ document.getElementById('signin-form').addEventListener('submit', async (e) => {
 });
 
 // Google Sign In
-const googleProvider = new firebase.auth.GoogleAuthProvider();
+const googleProvider = new GoogleAuthProvider();
 document.getElementById('google-signin').addEventListener('click', async () => {
     setLoading(true);
     try {
-        const result = await auth.signInWithPopup(googleProvider);
+        const result = await signInWithPopup(auth, googleProvider);
         console.log('Google sign in successful:', result.user);
         // Success! The auth state observer will handle the UI update
     } catch (error) {
@@ -159,7 +169,7 @@ document.getElementById('google-signin').addEventListener('click', async () => {
 document.getElementById('google-signup').addEventListener('click', async () => {
     setLoading(true);
     try {
-        const result = await auth.signInWithPopup(googleProvider);
+        const result = await signInWithPopup(auth, googleProvider);
         console.log('Google sign up successful:', result.user);
         // Success! The auth state observer will handle the UI update
     } catch (error) {
@@ -173,11 +183,11 @@ document.getElementById('google-signup').addEventListener('click', async () => {
 // Sign Out
 document.getElementById('signout-btn').addEventListener('click', async () => {
     try {
-        await auth.signOut();
+        await signOut(auth);
         console.log('User signed out');
         // Success! The auth state observer will handle the UI update
     } catch (error) {
         console.error('Error signing out:', error);
         showError('Failed to sign out. Please try again.');
     }
-});
+}); 
