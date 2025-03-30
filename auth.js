@@ -26,6 +26,15 @@ showSigninLink.addEventListener('click', (e) => {
 });
 
 // Authentication state observer
+const userEmailSpan = document.getElementById('user-email');
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        userEmailSpan.textContent = user.email; // Fills in the user's email
+    } else {
+        userEmailSpan.textContent = ''; // Clears it when the user is logged out
+    }
+});
+
 firebase.auth().onAuthStateChanged((user) => {
     console.log('Auth state changed:', user ? 'User signed in' : 'User signed out');
     if (user) {
