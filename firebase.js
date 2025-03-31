@@ -4,12 +4,12 @@ import { getAuth } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyDxXqXqXqXqXqXqXqXqXqXqXqXqXqXqXqXq",
-    authDomain: "revealedfaithct.firebaseapp.com",
-    projectId: "revealedfaithct",
-    storageBucket: "revealedfaithct.appspot.com",
-    messagingSenderId: "123456789012",
-    appId: "1:123456789012:web:abcdef1234567890"
+    apiKey: "AIzaSyBvqmhU5EOiYFQ8N3lSb1SMc7MPCXhOyj0",
+    authDomain: "ctrft-livestream.firebaseapp.com",
+    projectId: "ctrft-livestream",
+    storageBucket: "ctrft-livestream.firebasestorage.app",
+    messagingSenderId: "562371146015",
+    appId: "1:562371146015:web:39a6727864d94684ff402a"
 };
 
 // Initialize Firebase
@@ -17,6 +17,9 @@ const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 
 export { auth };
+
+
+
 
 
 
