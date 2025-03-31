@@ -62,30 +62,27 @@ showSigninLink.addEventListener('click', (e) => {
 // Authentication state observer
 firebase.auth().onAuthStateChanged((user) => {
     console.log('Auth state changed:', user ? 'User signed in' : 'User signed out');
-    if (user) {
-        console.log('User email:', user.email);
-        userEmailSpan.textContent = user.email;
-        
-        // Hide auth container and show livestream
-        authContainer.style.display = 'none';
-        livestreamSection.style.display = 'block';
-        livestreamSection.classList.add('visible');
-        
-        console.log('Auth container display:', authContainer.style.display);
-        console.log('Livestream section display:', livestreamSection.style.display);
-        console.log('Livestream section classes:', livestreamSection.classList.toString());
-    } else {
-        console.log('User signed out, hiding livestream');
-        userEmailSpan.textContent = '';
-        
-        // Show auth container and hide livestream
+    
+    // Always ensure auth container is visible until we have a definitive auth state
+    if (!user) {
+        console.log('No user, showing auth container');
         authContainer.style.display = 'block';
         livestreamSection.style.display = 'none';
         livestreamSection.classList.remove('visible');
+    } else {
+        console.log('User authenticated, showing livestream');
+        userEmailSpan.textContent = user.email;
         
-        console.log('Auth container display:', authContainer.style.display);
-        console.log('Livestream section display:', livestreamSection.style.display);
-        console.log('Livestream section classes:', livestreamSection.classList.toString());
+        // Only hide auth container and show livestream after confirming user is authenticated
+        setTimeout(() => {
+            authContainer.style.display = 'none';
+            livestreamSection.style.display = 'block';
+            livestreamSection.classList.add('visible');
+            
+            console.log('Auth container display:', authContainer.style.display);
+            console.log('Livestream section display:', livestreamSection.style.display);
+            console.log('Livestream section classes:', livestreamSection.classList.toString());
+        }, 100); // Small delay to ensure smooth transition
     }
 });
 
