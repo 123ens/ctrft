@@ -1,12 +1,3 @@
-import { auth } from './firebase.js';
-import { 
-    createUserWithEmailAndPassword, 
-    signInWithEmailAndPassword, 
-    signOut, 
-    GoogleAuthProvider, 
-    signInWithPopup 
-} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
-
 // DOM Elements
 const signinForm = document.getElementById('signin-form');
 const signupForm = document.getElementById('signup-form');
@@ -40,63 +31,36 @@ console.log('DOM Elements initialized:', {
 // Form switching
 showSignupLink.addEventListener('click', (e) => {
     e.preventDefault();
-    console.log('Switching to sign-up form');
     if (signinFormContainer && signupFormContainer) {
         signinFormContainer.classList.remove('active');
         signupFormContainer.classList.add('active');
-        console.log('Form classes after switch:', {
-            signinForm: signinFormContainer.classList.toString(),
-            signupForm: signupFormContainer.classList.toString()
-        });
-    } else {
-        console.error('Form containers not found');
     }
 });
 
 showSigninLink.addEventListener('click', (e) => {
     e.preventDefault();
-    console.log('Switching to sign-in form');
     if (signinFormContainer && signupFormContainer) {
         signupFormContainer.classList.remove('active');
         signinFormContainer.classList.add('active');
-        console.log('Form classes after switch:', {
-            signinForm: signinFormContainer.classList.toString(),
-            signupForm: signupFormContainer.classList.toString()
-        });
-    } else {
-        console.error('Form containers not found');
     }
 });
 
 // Authentication state observer
-auth.onAuthStateChanged((user) => {
-    console.log('Auth state changed:', user ? 'User signed in' : 'User signed out');
-    
-    if (!user) {
-        console.log('No user, showing auth container');
+firebase.auth().onAuthStateChanged((user) => {
+    if (user) {
+        userEmailSpan.textContent = user.email;
+        // Don't automatically show livestream
         authContainer.style.display = 'block';
         livestreamSection.style.display = 'none';
-        livestreamSection.classList.remove('visible');
-        userEmailSpan.textContent = '';
     } else {
-        console.log('User authenticated, showing livestream');
-        userEmailSpan.textContent = user.email;
-        
-        setTimeout(() => {
-            authContainer.style.display = 'none';
-            livestreamSection.style.display = 'block';
-            livestreamSection.classList.add('visible');
-            
-            console.log('Auth container display:', authContainer.style.display);
-            console.log('Livestream section display:', livestreamSection.style.display);
-            console.log('Livestream section classes:', livestreamSection.classList.toString());
-        }, 100);
+        userEmailSpan.textContent = '';
+        authContainer.style.display = 'block';
+        livestreamSection.style.display = 'none';
     }
 });
 
 // Helper function to show error messages
 function showError(message) {
-    console.log('Showing error message:', message);
     const errorDiv = document.createElement('div');
     errorDiv.className = 'error-message';
     errorDiv.textContent = message;
@@ -121,7 +85,6 @@ function showError(message) {
 
 // Helper function to set loading state
 function setLoading(isLoading) {
-    console.log('Setting loading state:', isLoading);
     const buttons = document.querySelectorAll('.form-container.active button');
     buttons.forEach(button => {
         button.disabled = isLoading;
@@ -138,34 +101,25 @@ function setLoading(isLoading) {
 if (signupForm) {
     signupForm.addEventListener('submit', async (e) => {
         e.preventDefault();
-        console.log('Sign up form submitted');
         setLoading(true);
         
         const email = document.getElementById('signup-email').value;
         const password = document.getElementById('signup-password').value;
 
-        console.log('Attempting to create user with email:', email);
-        console.log('Password length:', password.length);
-
         if (!email || !password) {
-            console.error('Email or password is empty');
             showError('Please fill in all fields');
             setLoading(false);
             return;
         }
 
         if (password.length < 6) {
-            console.error('Password too short');
             showError('Password must be at least 6 characters long');
             setLoading(false);
             return;
         }
 
         try {
-            console.log('Calling Firebase createUserWithEmailAndPassword');
-            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
-            console.log('User signed up successfully:', userCredential.user);
-            
+            const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
             // Clear the form
             signupForm.reset();
             
@@ -201,8 +155,6 @@ if (signupForm) {
             setLoading(false);
         }
     });
-} else {
-    console.error('Sign up form not found');
 }
 
 // Sign In
@@ -215,10 +167,14 @@ if (signinForm) {
         const password = document.getElementById('signin-password').value;
 
         try {
-            const userCredential = await signInWithEmailAndPassword(auth, email, password);
-            console.log('User signed in:', userCredential.user);
+            const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
             // Clear the form
             signinForm.reset();
+            
+            // Show livestream after successful sign in
+            authContainer.style.display = 'none';
+            livestreamSection.style.display = 'block';
+            livestreamSection.classList.add('visible');
         } catch (error) {
             console.error('Sign in error:', error);
             let errorMessage = 'An error occurred during sign in.';
@@ -245,8 +201,6 @@ if (signinForm) {
             setLoading(false);
         }
     });
-} else {
-    console.error('Sign in form not found');
 }
 
 // Google Sign In
@@ -254,9 +208,12 @@ if (googleSigninBtn) {
     googleSigninBtn.addEventListener('click', async () => {
         setLoading(true);
         try {
-            const provider = new GoogleAuthProvider();
-            const result = await signInWithPopup(auth, provider);
-            console.log('Google sign in successful:', result.user);
+            const provider = new firebase.auth.GoogleAuthProvider();
+            const result = await firebase.auth().signInWithPopup(provider);
+            // Show livestream after successful sign in
+            authContainer.style.display = 'none';
+            livestreamSection.style.display = 'block';
+            livestreamSection.classList.add('visible');
         } catch (error) {
             console.error('Google sign in error:', error);
             showError('Failed to sign in with Google. Please try again.');
@@ -264,8 +221,6 @@ if (googleSigninBtn) {
             setLoading(false);
         }
     });
-} else {
-    console.error('Google sign in button not found');
 }
 
 // Google Sign Up
@@ -273,9 +228,14 @@ if (googleSignupBtn) {
     googleSignupBtn.addEventListener('click', async () => {
         setLoading(true);
         try {
-            const provider = new GoogleAuthProvider();
-            const result = await signInWithPopup(auth, provider);
-            console.log('Google sign up successful:', result.user);
+            const provider = new firebase.auth.GoogleAuthProvider();
+            const result = await firebase.auth().signInWithPopup(provider);
+            // Show success message and switch to sign-in form
+            showError('Registration successful! Please sign in.');
+            if (signinFormContainer && signupFormContainer) {
+                signupFormContainer.classList.remove('active');
+                signinFormContainer.classList.add('active');
+            }
         } catch (error) {
             console.error('Google sign up error:', error);
             showError('Failed to sign up with Google. Please try again.');
@@ -283,16 +243,16 @@ if (googleSignupBtn) {
             setLoading(false);
         }
     });
-} else {
-    console.error('Google sign up button not found');
 }
 
 // Sign Out
 if (signoutBtn) {
     signoutBtn.addEventListener('click', async () => {
         try {
-            await signOut(auth);
-            console.log('User signed out');
+            await firebase.auth().signOut();
+            authContainer.style.display = 'block';
+            livestreamSection.style.display = 'none';
+            livestreamSection.classList.remove('visible');
         } catch (error) {
             console.error('Error signing out:', error);
             showError('Failed to sign out. Please try again.');
