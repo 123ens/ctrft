@@ -63,12 +63,13 @@ showSigninLink.addEventListener('click', (e) => {
 firebase.auth().onAuthStateChanged((user) => {
     console.log('Auth state changed:', user ? 'User signed in' : 'User signed out');
     
-    // Always ensure auth container is visible until we have a definitive auth state
+    // Always show auth container if no user
     if (!user) {
         console.log('No user, showing auth container');
         authContainer.style.display = 'block';
         livestreamSection.style.display = 'none';
         livestreamSection.classList.remove('visible');
+        userEmailSpan.textContent = '';
     } else {
         console.log('User authenticated, showing livestream');
         userEmailSpan.textContent = user.email;
@@ -82,7 +83,7 @@ firebase.auth().onAuthStateChanged((user) => {
             console.log('Auth container display:', authContainer.style.display);
             console.log('Livestream section display:', livestreamSection.style.display);
             console.log('Livestream section classes:', livestreamSection.classList.toString());
-        }, 100); // Small delay to ensure smooth transition
+        }, 100);
     }
 });
 
@@ -157,8 +158,20 @@ if (signupForm) {
             console.log('Calling Firebase createUserWithEmailAndPassword');
             const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
             console.log('User signed up successfully:', userCredential.user);
+            
+            // Sign out after successful registration
+            await firebase.auth().signOut();
+            console.log('User signed out after registration');
+            
             // Clear the form
             signupForm.reset();
+            
+            // Show success message and switch to sign-in form
+            showError('Registration successful! Please sign in.');
+            if (signinFormContainer && signupFormContainer) {
+                signupFormContainer.classList.remove('active');
+                signinFormContainer.classList.add('active');
+            }
         } catch (error) {
             console.error('Sign up error:', error);
             let errorMessage = 'An error occurred during sign up.';
@@ -283,5 +296,7 @@ if (signoutBtn) {
         }
     });
 } else {
+    console.error('Sign out button not found');
+} 
     console.error('Sign out button not found');
 } 
