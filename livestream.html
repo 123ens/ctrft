@@ -12,8 +12,8 @@
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
         <!-- Firebase SDK -->
-        <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app-compat.js"></script>
-        <script src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth-compat.js"></script>
+        <script type="module" src="https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js"></script>
+        <script type="module" src="https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js"></script>
     </head>
 
     <body>
@@ -35,7 +35,7 @@
                 </nav>
             </Header>
 
-            <section id="auth-container" style="display: block;">
+            <section id="auth-container">
                 <div class="auth-container">
                     <h2>Welcome to Revealed Faith</h2>
                     <div id="signin-form-container" class="form-container active">
@@ -85,8 +85,8 @@
                 </div>
             </section>
 
-            <script src="./firebase.js"></script>
-            <script src="./auth.js"></script>
+            <script type="module" src="./firebase.js"></script>
+            <script type="module" src="./auth.js"></script>
            
             <footer>
                 <style>
@@ -105,3 +105,5 @@
         </div>
     </body>
 </html> 
+
+
