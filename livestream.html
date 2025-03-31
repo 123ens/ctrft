@@ -5,8 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Livestream</title>
 
-        <link href="style4.css" rel="stylesheet" type="text/css">
-        <link href="livestream.css" rel="stylesheet" type="text/css">
         <link href="sign-up-in.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
@@ -17,10 +15,8 @@
     </head>
 
     <body>
-        <div id="error-message" style="display: none; color: red; text-align: center; margin-top: 10px;"></div>
-
         <div class="container"> 
-            <header>
+            <Header>
                 <nav>
                     <div class="header">
                         <h1 style="text-align: center;">Livestream</h1>
@@ -30,10 +26,7 @@
                             </ul>
                         </div>
                         <div id="user-info">
-                           <span>
-                           Welcome, <span id="user-email"></span>
-                           </span>
-
+                            <span>Welcome, <span id="user-email"></span></span>
                             <button id="signout-btn">Sign Out</button>
                         </div>
                     </div>
@@ -71,9 +64,9 @@
                         <div class="divider">
                             <span>or</span>
                         </div>
-                        <button class="google-btn" id="google-signup" aria-label="Continue with Google">
-                        <img src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg" alt="Google" width="20">
-                        Continue with Google
+                        <button class="google-btn" id="google-signup">
+                            <img src="https://www.google.com/favicon.ico" alt="Google">
+                            Continue with Google
                         </button>
                         <div class="auth-switch">
                             Already have an account? <a href="#" id="show-signin">Sign In</a>
@@ -85,9 +78,8 @@
             <section id="livestream-section" style="display: none;">
                 <div class="center-container">
                     <iframe src="https://player.twitch.tv/?channel=revealedfaithct&parent=www.revealedfaith.co.za" 
-        frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620">
-</iframe>
-
+                            frameborder="0" allowfullscreen="true" scrolling="no" height="378" width="620">
+                    </iframe>
                 </div>
             </section>
 
@@ -95,7 +87,17 @@
             <script src="./auth.js"></script>
            
             <footer>
-                
+                <style>
+                    footer {
+                        position: fixed;
+                        padding: 10px 10px 0px 10px;
+                        bottom: 0;
+                        width: 100%;
+                        height: 40px;
+                        background: rgb(6, 53, 68);
+                        color: aliceblue;
+                    }
+                </style>
                 <center><p><span>&copy;</span> 2024 &nbsp;&nbsp;&nbsp; Cape Town Revealed Faith Tabernacle</p></center>
             </footer>
         </div>
