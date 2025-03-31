@@ -1,20 +1,29 @@
-/* Centering the livestream section */
 #livestream-section {
-    display: flex; /* Enables flexbox for centering */
-    justify-content: center; /* Centers horizontally */
-    align-items: center; /* Centers vertically */
-    height: 100vh; /* Ensures it takes up the full viewport height */
-    text-align: center; /* Aligns text content */
+    display: none;
+    width: 100%;
+    padding: 20px;
+    margin-top: 20px;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: relative;
+    z-index: 1;
 }
 
-/* Centering the container */
+#livestream-section.visible {
+    opacity: 1;
+}
+
 .center-container {
-    margin: 0 auto; /* Centers the container */
-    display: inline-block; /* Ensures it's inline and centered */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 400px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    padding: 20px;
 }
 
-.error-message {
-    color: red;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+iframe {
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+} 
