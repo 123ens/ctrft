@@ -1,3 +1,12 @@
+import { auth } from './firebase.js';
+import { 
+    createUserWithEmailAndPassword, 
+    signInWithEmailAndPassword, 
+    signOut, 
+    GoogleAuthProvider, 
+    signInWithPopup 
+} from "https://www.gstatic.com/firebasejs/9.15.0/firebase-auth.js";
+
 // DOM Elements
 const signinForm = document.getElementById('signin-form');
 const signupForm = document.getElementById('signup-form');
@@ -60,10 +69,9 @@ showSigninLink.addEventListener('click', (e) => {
 });
 
 // Authentication state observer
-firebase.auth().onAuthStateChanged((user) => {
+auth.onAuthStateChanged((user) => {
     console.log('Auth state changed:', user ? 'User signed in' : 'User signed out');
     
-    // Always show auth container if no user
     if (!user) {
         console.log('No user, showing auth container');
         authContainer.style.display = 'block';
@@ -74,7 +82,6 @@ firebase.auth().onAuthStateChanged((user) => {
         console.log('User authenticated, showing livestream');
         userEmailSpan.textContent = user.email;
         
-        // Only hide auth container and show livestream after confirming user is authenticated
         setTimeout(() => {
             authContainer.style.display = 'none';
             livestreamSection.style.display = 'block';
@@ -156,12 +163,8 @@ if (signupForm) {
 
         try {
             console.log('Calling Firebase createUserWithEmailAndPassword');
-            const userCredential = await firebase.auth().createUserWithEmailAndPassword(email, password);
+            const userCredential = await createUserWithEmailAndPassword(auth, email, password);
             console.log('User signed up successfully:', userCredential.user);
-            
-            // Sign out after successful registration
-            await firebase.auth().signOut();
-            console.log('User signed out after registration');
             
             // Clear the form
             signupForm.reset();
@@ -212,7 +215,7 @@ if (signinForm) {
         const password = document.getElementById('signin-password').value;
 
         try {
-            const userCredential = await firebase.auth().signInWithEmailAndPassword(email, password);
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
             console.log('User signed in:', userCredential.user);
             // Clear the form
             signinForm.reset();
@@ -251,8 +254,8 @@ if (googleSigninBtn) {
     googleSigninBtn.addEventListener('click', async () => {
         setLoading(true);
         try {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            const result = await firebase.auth().signInWithPopup(provider);
+            const provider = new GoogleAuthProvider();
+            const result = await signInWithPopup(auth, provider);
             console.log('Google sign in successful:', result.user);
         } catch (error) {
             console.error('Google sign in error:', error);
@@ -270,8 +273,8 @@ if (googleSignupBtn) {
     googleSignupBtn.addEventListener('click', async () => {
         setLoading(true);
         try {
-            const provider = new firebase.auth.GoogleAuthProvider();
-            const result = await firebase.auth().signInWithPopup(provider);
+            const provider = new GoogleAuthProvider();
+            const result = await signInWithPopup(auth, provider);
             console.log('Google sign up successful:', result.user);
         } catch (error) {
             console.error('Google sign up error:', error);
@@ -288,7 +291,7 @@ if (googleSignupBtn) {
 if (signoutBtn) {
     signoutBtn.addEventListener('click', async () => {
         try {
-            await firebase.auth().signOut();
+            await signOut(auth);
             console.log('User signed out');
         } catch (error) {
             console.error('Error signing out:', error);
@@ -296,7 +299,5 @@ if (signoutBtn) {
         }
     });
 } else {
-    console.error('Sign out button not found');
-} 
     console.error('Sign out button not found');
 } 
