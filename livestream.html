@@ -5,7 +5,6 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Livestream</title>
 
-        <link href="style4.css" rel="stylesheet" type="text/css">
         <link href="livestream.css" rel="stylesheet" type="text/css">
         <link href="sign-up-in.css" rel="stylesheet" type="text/css">
         <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap">
@@ -35,40 +34,34 @@
                 </nav>
             </Header>
 
-            <section id="auth-container">
+            <section id="auth-container" style="display: block;">
                 <div class="auth-container">
+                    <h2>Welcome to Revealed Faith</h2>
                     <div id="signin-form-container" class="form-container active">
-                        <h2>Welcome Back</h2>
                         <form id="signin-form">
-                            <input type="email" id="signin-email" placeholder="Email" required />
-                            <input type="password" id="signin-password" placeholder="Password" required />
+                            <input type="email" id="signin-email" placeholder="Email" required>
+                            <input type="password" id="signin-password" placeholder="Password" required>
                             <button type="submit">Sign In</button>
                         </form>
-                        <div class="divider">
-                            <span>or</span>
-                        </div>
-                        <button class="google-btn" id="google-signin">
+                        <div class="divider"><span>or</span></div>
+                        <button id="google-signin" class="google-btn">
                             <img src="https://www.google.com/favicon.ico" alt="Google">
-                            Continue with Google
+                            Sign in with Google
                         </button>
                         <div class="auth-switch">
                             Don't have an account? <a href="#" id="show-signup">Sign Up</a>
                         </div>
                     </div>
-
                     <div id="signup-form-container" class="form-container">
-                        <h2>Create Account</h2>
                         <form id="signup-form">
-                            <input type="email" id="signup-email" placeholder="Email" required />
-                            <input type="password" id="signup-password" placeholder="Password" required />
+                            <input type="email" id="signup-email" placeholder="Email" required>
+                            <input type="password" id="signup-password" placeholder="Password" required>
                             <button type="submit">Sign Up</button>
                         </form>
-                        <div class="divider">
-                            <span>or</span>
-                        </div>
-                        <button class="google-btn" id="google-signup">
+                        <div class="divider"><span>or</span></div>
+                        <button id="google-signup" class="google-btn">
                             <img src="https://www.google.com/favicon.ico" alt="Google">
-                            Continue with Google
+                            Sign up with Google
                         </button>
                         <div class="auth-switch">
                             Already have an account? <a href="#" id="show-signin">Sign In</a>
